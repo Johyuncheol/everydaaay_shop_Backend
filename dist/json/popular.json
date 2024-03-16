@@ -1,0 +1,159 @@
+[
+    {
+        "name": "요즘 뜨는 제품",
+        "elementRatio": "4/5",
+        "array": [
+            {
+                "_id": "658ec25d2453f4c98e89a5fb",
+                "id": "0",
+                "imgSrc": "https://cdn.pixabay.com/photo/2022/04/30/18/55/woman-7166177_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+
+            },
+            {
+                "_id": "658ec2692453f4c98e89a5fc",
+                "id": "1",
+                "imgSrc": "https://cdn.pixabay.com/photo/2022/05/06/16/58/woman-7178725_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec27a2453f4c98e89a5fd",
+                "id": "2",
+                "imgSrc": "https://cdn.pixabay.com/photo/2021/10/21/15/14/fashion-6729394_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec2862453f4c98e89a5fe",
+                "id": "3",
+                "imgSrc": "https://cdn.pixabay.com/photo/2022/02/16/17/58/fashion-7017234_1280.jpg\n",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec2902453f4c98e89a5ff",
+                "id": "4",
+                "imgSrc": "https://cdn.pixabay.com/photo/2021/09/11/13/09/woman-6615595_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec2a12453f4c98e89a600",
+                "id": "5",
+                "imgSrc": "https://cdn.pixabay.com/photo/2022/03/14/06/56/woman-7067479_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec2dc2453f4c98e89a601",
+                "id": "6",
+                "imgSrc": "https://cdn.pixabay.com/photo/2022/09/19/18/22/woman-7466191_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec2e52453f4c98e89a602",
+                "id": "7",
+                "imgSrc": "https://cdn.pixabay.com/photo/2022/07/28/05/50/indian-man-7349185_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            }
+        ]
+    },
+    {
+        "name": "추천 제품",
+        "elementRatio": "4/5",
+        "array": [
+            {
+                "_id": "658ec25d2453f4c98e89a5fb",
+                "id": "0",
+                "imgSrc": "https://cdn.pixabay.com/photo/2022/04/30/18/55/woman-7166177_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec2692453f4c98e89a5fc",
+                "id": "1",
+                "imgSrc": "https://cdn.pixabay.com/photo/2022/05/06/16/58/woman-7178725_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec27a2453f4c98e89a5fd",
+                "id": "2",
+                "imgSrc": "https://cdn.pixabay.com/photo/2021/10/21/15/14/fashion-6729394_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec2862453f4c98e89a5fe",
+                "id": "3",
+                "imgSrc": "https://cdn.pixabay.com/photo/2022/02/16/17/58/fashion-7017234_1280.jpg\n",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec2902453f4c98e89a5ff",
+                "id": "4",
+                "imgSrc": "https://cdn.pixabay.com/photo/2021/09/11/13/09/woman-6615595_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec2a12453f4c98e89a600",
+                "id": "5",
+                "imgSrc": "https://cdn.pixabay.com/photo/2022/03/14/06/56/woman-7067479_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec2dc2453f4c98e89a601",
+                "id": "6",
+                "imgSrc": "https://cdn.pixabay.com/photo/2022/09/19/18/22/woman-7466191_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            },
+            {
+                "_id": "658ec2e52453f4c98e89a602",
+                "id": "7",
+                "imgSrc": "https://cdn.pixabay.com/photo/2022/07/28/05/50/indian-man-7349185_1280.jpg",
+                "alt": "상품이미지",
+                "brand":"브랜드명",
+                "name":"상품명",
+                "price":30000
+            }
+        ]
+    }
+]
