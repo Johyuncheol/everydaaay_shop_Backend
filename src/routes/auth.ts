@@ -35,6 +35,7 @@ router.post("/login", async (req: Request, res: Response) => {
         secure: true,
         httpOnly: true,
         expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+        domain: ".everydaaay.com",
         sameSite: "none",
       });
 
@@ -43,6 +44,7 @@ router.post("/login", async (req: Request, res: Response) => {
         secure: true,
         httpOnly: true,
         expires: new Date(Date.now() + kr + 30 * 60 * 1000),
+        domain: ".everydaaay.com",
         sameSite: "none",
       });
 
@@ -50,6 +52,7 @@ router.post("/login", async (req: Request, res: Response) => {
       res.cookie("name", `${user.name}`, {
         secure: true,
         expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+        domain: ".everydaaay.com",
         sameSite: "none",
       });
 
@@ -58,6 +61,7 @@ router.post("/login", async (req: Request, res: Response) => {
         secure: true,
         httpOnly: true,
         expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+        domain: ".everydaaay.com",
         sameSite: "none",
       });
 
@@ -114,6 +118,7 @@ router.post("/isLogin", async (req: Request, res: Response) => {
         secure: true,
         httpOnly: true,
         expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+        domain: ".everydaaay.com",
         sameSite: "none",
       });
 
@@ -132,6 +137,7 @@ router.post("/logout", (req: Request, res: Response) => {
     secure: true,
     httpOnly: true,
     expires: new Date("1997-04-22T00:00:00Z"), // 유효기간을 지난날짜로 설정 (토큰삭제)
+    domain: ".everydaaay.com",
     sameSite: "none",
   });
 
@@ -139,6 +145,7 @@ router.post("/logout", (req: Request, res: Response) => {
     secure: true,
     httpOnly: true,
     expires: new Date("1997-04-22T00:00:00Z"), // 유효기간을 지난날짜로 설정 (토큰삭제)
+    domain: ".everydaaay.com",
     sameSite: "none",
   });
 

@@ -42,6 +42,7 @@ router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 secure: true,
                 httpOnly: true,
                 expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+                domain: ".everydaaay.com",
                 sameSite: "none",
             });
             //리프레시 토큰 유효기간 30분
@@ -49,12 +50,14 @@ router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 secure: true,
                 httpOnly: true,
                 expires: new Date(Date.now() + kr + 30 * 60 * 1000),
+                domain: ".everydaaay.com",
                 sameSite: "none",
             });
             //민감하지않은 정보인 이름 전달
             res.cookie("name", `${user.name}`, {
                 secure: true,
                 expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+                domain: ".everydaaay.com",
                 sameSite: "none",
             });
             //개인정보구분 데이터
@@ -62,6 +65,7 @@ router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 secure: true,
                 httpOnly: true,
                 expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+                domain: ".everydaaay.com",
                 sameSite: "none",
             });
             return res.status(201).send({
@@ -111,6 +115,7 @@ router.post("/isLogin", (req, res) => __awaiter(void 0, void 0, void 0, function
                 secure: true,
                 httpOnly: true,
                 expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+                domain: ".everydaaay.com",
                 sameSite: "none",
             });
             return res.status(201).json({
@@ -128,12 +133,14 @@ router.post("/logout", (req, res) => {
         secure: true,
         httpOnly: true,
         expires: new Date("1997-04-22T00:00:00Z"), // 유효기간을 지난날짜로 설정 (토큰삭제)
+        domain: ".everydaaay.com",
         sameSite: "none",
     });
     res.cookie("refreshToken", "refresh", {
         secure: true,
         httpOnly: true,
         expires: new Date("1997-04-22T00:00:00Z"), // 유효기간을 지난날짜로 설정 (토큰삭제)
+        domain: ".everydaaay.com",
         sameSite: "none",
     });
     res.status(201).json({
