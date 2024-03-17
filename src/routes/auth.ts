@@ -30,7 +30,7 @@ router.post("/login", async (req: Request, res: Response) => {
       const resdata = { name: user.name, bag: user.bag };
 
       const kr = 9 * 60 * 60 * 1000;
-      const expiresTime=new Date(Date.now() + kr + 15 * 60 * 1000);
+      const expiresTime = new Date(Date.now() + kr + 15 * 60 * 1000);
       // 엑세스토큰 유효기간 15분
       res.cookie("accessToken", `${userId}-access`, {
         secure: true,
@@ -113,7 +113,7 @@ router.post("/isLogin", async (req: Request, res: Response) => {
       //엑세스토큰을 사용 유저 닉네임 추출
       const resdata = { name: user.name };
       const kr = 9 * 60 * 60 * 1000;
-      const expiresTime=new Date(Date.now() + kr + 15 * 60 * 1000);
+      const expiresTime = new Date(Date.now() + kr + 15 * 60 * 1000);
       // 엑세스토큰 유효기간 15분
       res.cookie("accessToken", `${accessID}-access`, {
         secure: true,
@@ -145,6 +145,14 @@ router.post("/logout", (req: Request, res: Response) => {
   res.cookie("refreshToken", "refresh", {
     secure: true,
     httpOnly: true,
+    expires: new Date("1997-04-22T00:00:00Z"), // 유효기간을 지난날짜로 설정 (토큰삭제)
+    domain: ".everydaaay.com",
+    sameSite: "strict",
+  });
+
+  //민감하지않은 정보인 이름 전달
+  res.cookie("name", `name`, {
+    secure: true,
     expires: new Date("1997-04-22T00:00:00Z"), // 유효기간을 지난날짜로 설정 (토큰삭제)
     domain: ".everydaaay.com",
     sameSite: "strict",

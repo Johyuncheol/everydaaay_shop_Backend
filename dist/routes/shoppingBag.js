@@ -38,6 +38,12 @@ const generateDate_WidthoutMilisec = () => {
 let lastModifiedTimestamps = generateDate_WidthoutMilisec();
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const cookies = req.cookies;
+    if (!cookies.accessToken) {
+        return res.status(201).send({
+            data: [],
+            status: "not Login User",
+        });
+    }
     const accessID = cookies.accessToken.split("-")[0];
     const user = yield User.findOne({ id: accessID });
     // Cache-Control: no-cache 헤더 확인

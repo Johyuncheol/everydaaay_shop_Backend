@@ -31,6 +31,14 @@ let lastModifiedTimestamps: Date = generateDate_WidthoutMilisec();
 
 router.get("/", async (req: Request, res: Response) => {
   const cookies = req.cookies;
+
+  if (!cookies.accessToken) {
+    return res.status(201).send({
+      data: [],
+      status: "not Login User",
+    });
+  }
+
   const accessID = cookies.accessToken.split("-")[0];
 
   const user = await User.findOne({ id: accessID });

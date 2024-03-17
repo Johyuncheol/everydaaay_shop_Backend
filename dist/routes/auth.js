@@ -145,6 +145,13 @@ router.post("/logout", (req, res) => {
         domain: ".everydaaay.com",
         sameSite: "strict",
     });
+    //민감하지않은 정보인 이름 전달
+    res.cookie("name", `name`, {
+        secure: true,
+        expires: new Date("1997-04-22T00:00:00Z"), // 유효기간을 지난날짜로 설정 (토큰삭제)
+        domain: ".everydaaay.com",
+        sameSite: "strict",
+    });
     res.status(201).json({
         message: "Success to logout",
     });
