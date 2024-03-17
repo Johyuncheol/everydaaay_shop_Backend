@@ -30,39 +30,40 @@ router.post("/login", async (req: Request, res: Response) => {
       const resdata = { name: user.name, bag: user.bag };
 
       const kr = 9 * 60 * 60 * 1000;
+      const expiresTime=new Date(Date.now() + kr + 15 * 60 * 1000);
       // 엑세스토큰 유효기간 15분
       res.cookie("accessToken", `${userId}-access`, {
         secure: true,
         httpOnly: true,
-        expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+        expires: expiresTime,
         domain: ".everydaaay.com",
-        sameSite: "none",
+        sameSite: "strict",
       });
 
       //리프레시 토큰 유효기간 30분
       res.cookie("refreshToken", `${userId}-refresh`, {
         secure: true,
         httpOnly: true,
-        expires: new Date(Date.now() + kr + 30 * 60 * 1000),
+        expires: expiresTime,
         domain: ".everydaaay.com",
-        sameSite: "none",
+        sameSite: "strict",
       });
 
       //민감하지않은 정보인 이름 전달
       res.cookie("name", `${user.name}`, {
         secure: true,
-        expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+        expires: expiresTime,
         domain: ".everydaaay.com",
-        sameSite: "none",
+        sameSite: "strict",
       });
 
       //개인정보구분 데이터
       res.cookie("user_id", `${user._id}`, {
         secure: true,
         httpOnly: true,
-        expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+        expires: expiresTime,
         domain: ".everydaaay.com",
-        sameSite: "none",
+        sameSite: "strict",
       });
 
       return res.status(201).send({
@@ -112,14 +113,14 @@ router.post("/isLogin", async (req: Request, res: Response) => {
       //엑세스토큰을 사용 유저 닉네임 추출
       const resdata = { name: user.name };
       const kr = 9 * 60 * 60 * 1000;
-
+      const expiresTime=new Date(Date.now() + kr + 15 * 60 * 1000);
       // 엑세스토큰 유효기간 15분
       res.cookie("accessToken", `${accessID}-access`, {
         secure: true,
         httpOnly: true,
-        expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+        expires: expiresTime,
         domain: ".everydaaay.com",
-        sameSite: "none",
+        sameSite: "strict",
       });
 
       return res.status(201).json({
@@ -138,7 +139,7 @@ router.post("/logout", (req: Request, res: Response) => {
     httpOnly: true,
     expires: new Date("1997-04-22T00:00:00Z"), // 유효기간을 지난날짜로 설정 (토큰삭제)
     domain: ".everydaaay.com",
-    sameSite: "none",
+    sameSite: "strict",
   });
 
   res.cookie("refreshToken", "refresh", {
@@ -146,7 +147,7 @@ router.post("/logout", (req: Request, res: Response) => {
     httpOnly: true,
     expires: new Date("1997-04-22T00:00:00Z"), // 유효기간을 지난날짜로 설정 (토큰삭제)
     domain: ".everydaaay.com",
-    sameSite: "none",
+    sameSite: "strict",
   });
 
   res.status(201).json({
