@@ -17,13 +17,13 @@ const cors = require("cors");
 const port = 8080;
 app.use(cors({
     origin: [
-        "http://localhost:3002",
         "https://everydaaay.com",
         "https://category.everydaaay.com",
         "https://detail.everydaaay.com",
         "https://contents.everydaaay.com",
         "https://buy.everydaaay.com",
         "https://auth.everydaaay.com",
+        "http://localhost:3001",
         "http://localhost:3003",
         "http://localhost:3002",
         "http://localhost:3000"

@@ -15,7 +15,7 @@ const port = 8080;
 app.use(
   cors({
     origin: [
-      "http://localhost:3002",
+
       
       "https://everydaaay.com",
 
@@ -28,7 +28,7 @@ app.use(
 
       "https://auth.everydaaay.com",
 
-      
+      "http://localhost:3001",
       "http://localhost:3003",
       "http://localhost:3002",
       "http://localhost:3000"

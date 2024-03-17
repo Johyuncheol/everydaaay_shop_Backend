@@ -51,6 +51,19 @@ router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 expires: new Date(Date.now() + kr + 30 * 60 * 1000),
                 sameSite: "none",
             });
+            //민감하지않은 정보인 이름 전달
+            res.cookie("name", `${user.name}`, {
+                secure: true,
+                expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+                sameSite: "none",
+            });
+            //개인정보구분 데이터
+            res.cookie("user_id", `${user._id}`, {
+                secure: true,
+                httpOnly: true,
+                expires: new Date(Date.now() + kr + 15 * 60 * 1000),
+                sameSite: "none",
+            });
             return res.status(201).send({
                 data: resdata,
                 status: "Success Login",
@@ -97,11 +110,6 @@ router.post("/isLogin", (req, res) => __awaiter(void 0, void 0, void 0, function
             res.cookie("accessToken", `${accessID}-access`, {
                 secure: true,
                 httpOnly: true,
-                expires: new Date(Date.now() + kr + 15 * 60 * 1000),
-                sameSite: "none",
-            });
-            res.cookie("name", user.name, {
-                secure: true,
                 expires: new Date(Date.now() + kr + 15 * 60 * 1000),
                 sameSite: "none",
             });

@@ -25,7 +25,6 @@ router.post("/login", async (req: Request, res: Response) => {
   const userPW: string = req.body.password;
 
   const user = await User.findOne({ id: userId });
-  console.log(user)
   if (user) {
     if (user.password === userPW) {
       const resdata = { name: user.name, bag: user.bag };
@@ -55,7 +54,7 @@ router.post("/login", async (req: Request, res: Response) => {
       });
 
       //개인정보구분 데이터
-      res.cookie("user-id", `${user._id}`, {
+      res.cookie("user_id", `${user._id}`, {
         secure: true,
         httpOnly: true,
         expires: new Date(Date.now() + kr + 15 * 60 * 1000),
