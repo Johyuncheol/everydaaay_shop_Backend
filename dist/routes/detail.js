@@ -19,10 +19,8 @@ router.get("/", (req, res) => {
     const id = url.searchParams.get("id");
     let lastModifiedTimestamp;
     if (id) {
-        if (lastModifiedTimestamps[id] === undefined) {
-            lastModifiedTimestamps[id] = { [id]: generateDate_WidthoutMilisec() };
-        }
-        lastModifiedTimestamp = lastModifiedTimestamps[id][id]; // 수정된 부분
+        lastModifiedTimestamps[id] = generateDate_WidthoutMilisec();
+        lastModifiedTimestamp = lastModifiedTimestamps[id]; // 수정된 부분
     }
     if (req.get("Cache-Control") === "no-cache" && req.get("If-Modified-Since")) {
         // Last-Modified 헤더 확인
@@ -61,14 +59,10 @@ router.get("/ask", (req, res) => {
     const page = Number(url.searchParams.get("page"));
     const numOfShow = Number(url.searchParams.get("numOfShow"));
     let lastModifiedTimestamp;
-    const TimeStampKey = `ask_${id}`;
+    const TimeStampKey = `ask_${id}_${page}`;
     if (id) {
-        if (lastModifiedTimestamps[TimeStampKey] === undefined) {
-            lastModifiedTimestamps[TimeStampKey] = {
-                [TimeStampKey]: generateDate_WidthoutMilisec(),
-            };
-        }
-        lastModifiedTimestamp = lastModifiedTimestamps[TimeStampKey][TimeStampKey]; // 수정된 부분
+        lastModifiedTimestamps[TimeStampKey] = generateDate_WidthoutMilisec();
+        lastModifiedTimestamp = lastModifiedTimestamps[TimeStampKey]; // 수정된 부분
     }
     if (req.get("Cache-Control") === "no-cache" && req.get("If-Modified-Since")) {
         // Last-Modified 헤더 확인
@@ -103,7 +97,7 @@ router.get("/ask", (req, res) => {
             const findData = data[id].slice((page - 1) * numOfShow, page * numOfShow);
             const sendData = {
                 data: findData,
-                totalNums: data[id].length,
+                totalNums: data[id].length - 1,
             };
             // 타임스탬프 추가
             if (lastModifiedTimestamp) {
@@ -124,14 +118,10 @@ router.get("/review", (req, res) => {
     const page = Number(url.searchParams.get("page"));
     const numOfShow = Number(url.searchParams.get("numOfShow"));
     let lastModifiedTimestamp;
-    const TimeStampKey = `review_${id}`;
+    const TimeStampKey = `review_${id}_${page}`;
     if (id) {
-        if (lastModifiedTimestamps[TimeStampKey] === undefined) {
-            lastModifiedTimestamps[TimeStampKey] = {
-                [TimeStampKey]: generateDate_WidthoutMilisec(),
-            };
-        }
-        lastModifiedTimestamp = lastModifiedTimestamps[TimeStampKey][TimeStampKey]; // 수정된 부분
+        lastModifiedTimestamps[TimeStampKey] = generateDate_WidthoutMilisec();
+        lastModifiedTimestamp = lastModifiedTimestamps[TimeStampKey]; // 수정된 부분
     }
     if (req.get("Cache-Control") === "no-cache" && req.get("If-Modified-Since")) {
         // Last-Modified 헤더 확인

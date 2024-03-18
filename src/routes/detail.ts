@@ -12,11 +12,9 @@ const generateDate_WidthoutMilisec = (): Date => {
   return dateWithoutMilliseconds;
 };
 
-// 카테고리와 디테일별 마지막 수정 시간을 저장하기 위한 객체
+//  디테일 / 리뷰 / 문의 데이터 타임스탬프타입
 interface LastModifiedTimestamps {
-  [category: string]: {
-    [detail: string]: Date;
-  };
+  [timestampKey: string]: Date;
 }
 
 let lastModifiedTimestamps: LastModifiedTimestamps = {};
@@ -27,11 +25,8 @@ router.get("/", (req: Request, res: Response) => {
 
   let lastModifiedTimestamp;
   if (id) {
-    if (lastModifiedTimestamps[id] === undefined) {
-      lastModifiedTimestamps[id] = { [id]: generateDate_WidthoutMilisec() };
-    }
-
-    lastModifiedTimestamp = lastModifiedTimestamps[id][id]; // 수정된 부분
+    lastModifiedTimestamps[id] = generateDate_WidthoutMilisec();
+    lastModifiedTimestamp = lastModifiedTimestamps[id]; // 수정된 부분
   }
 
   if (req.get("Cache-Control") === "no-cache" && req.get("If-Modified-Since")) {
@@ -90,15 +85,11 @@ router.get("/ask", (req: Request, res: Response) => {
 
   let lastModifiedTimestamp;
 
-  const TimeStampKey = `ask_${id}`;
+  const TimeStampKey = `ask_${id}_${page}`;
   if (id) {
-    if (lastModifiedTimestamps[TimeStampKey] === undefined) {
-      lastModifiedTimestamps[TimeStampKey] = {
-        [TimeStampKey]: generateDate_WidthoutMilisec(),
-      };
-    }
+    lastModifiedTimestamps[TimeStampKey] = generateDate_WidthoutMilisec();
 
-    lastModifiedTimestamp = lastModifiedTimestamps[TimeStampKey][TimeStampKey]; // 수정된 부분
+    lastModifiedTimestamp = lastModifiedTimestamps[TimeStampKey]; // 수정된 부분
   }
 
   if (req.get("Cache-Control") === "no-cache" && req.get("If-Modified-Since")) {
@@ -147,7 +138,7 @@ router.get("/ask", (req: Request, res: Response) => {
       const findData = data[id].slice((page - 1) * numOfShow, page * numOfShow);
       const sendData = {
         data: findData,
-        totalNums: data[id].length,
+        totalNums: data[id].length - 1,
       };
 
       // 타임스탬프 추가
@@ -172,15 +163,11 @@ router.get("/review", (req: Request, res: Response) => {
 
   let lastModifiedTimestamp;
 
-  const TimeStampKey = `review_${id}`;
+  const TimeStampKey = `review_${id}_${page}`;
   if (id) {
-    if (lastModifiedTimestamps[TimeStampKey] === undefined) {
-      lastModifiedTimestamps[TimeStampKey] = {
-        [TimeStampKey]: generateDate_WidthoutMilisec(),
-      };
-    }
+    lastModifiedTimestamps[TimeStampKey] = generateDate_WidthoutMilisec();
 
-    lastModifiedTimestamp = lastModifiedTimestamps[TimeStampKey][TimeStampKey]; // 수정된 부분
+    lastModifiedTimestamp = lastModifiedTimestamps[TimeStampKey]; // 수정된 부분
   }
 
   if (req.get("Cache-Control") === "no-cache" && req.get("If-Modified-Since")) {

@@ -13,31 +13,19 @@ const generateDate_WidthoutMilisec = () => {
     dateWithoutMilliseconds.setMilliseconds(0);
     return dateWithoutMilliseconds;
 };
-let lastModifiedTimestamps = {
-    women: {
-        all: generateDate_WidthoutMilisec(),
-        outer: generateDate_WidthoutMilisec(),
-        top: generateDate_WidthoutMilisec(),
-        bottom: generateDate_WidthoutMilisec(),
-    },
-    man: {
-        all: generateDate_WidthoutMilisec(),
-        outer: generateDate_WidthoutMilisec(),
-        top: generateDate_WidthoutMilisec(),
-        bottom: generateDate_WidthoutMilisec(),
-    },
-    interior: {
-        all: generateDate_WidthoutMilisec(),
-        livingRoom: generateDate_WidthoutMilisec(),
-        bedroom: generateDate_WidthoutMilisec(),
-        kitchen: generateDate_WidthoutMilisec(),
-    },
-};
+let lastModifiedTimestamps = {};
 router.get("/:category/:detail", (req, res) => {
-    var _a;
     const category = req.params.category;
     const detail = req.params.detail;
-    const lastModifiedTimestamp = (_a = lastModifiedTimestamps[category]) === null || _a === void 0 ? void 0 : _a[detail];
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    const page = Number(url.searchParams.get("page"));
+    const numOfShow = Number(url.searchParams.get("numOfShow"));
+    let lastModifiedTimestamp;
+    const TimeStampKey = `${category}_${detail}_${page}`;
+    if (lastModifiedTimestamps[TimeStampKey] === undefined) {
+        lastModifiedTimestamps[TimeStampKey] = generateDate_WidthoutMilisec();
+    }
+    lastModifiedTimestamp = lastModifiedTimestamps[TimeStampKey];
     if (req.get("Cache-Control") === "no-cache" && req.get("If-Modified-Since")) {
         // Last-Modified 헤더 확인
         const ifModifiedSince = req.get("If-Modified-Since");
@@ -52,11 +40,8 @@ router.get("/:category/:detail", (req, res) => {
     }
     // 해당 영역의 응답을 전송하기 전에 마지막 수정 시간 업데이트
     res.set("Last-Modified", lastModifiedTimestamp.toUTCString());
-    const url = new URL(req.url, `http://${req.headers.host}`);
-    const page = Number(url.searchParams.get("page"));
-    const numOfShow = Number(url.searchParams.get("numOfShow"));
     /*  const category = req.params.category as string;
-     const detail = req.params.detail as keyof WomenData; */
+    const detail = req.params.detail as keyof WomenData; */
     let data = [];
     if (category === "women") {
         data = womenData[detail] || [];
@@ -82,7 +67,7 @@ router.get("/:category/:detail", (req, res) => {
             data: findData,
             totalNums: data.length,
         };
-        return res.status(202).json(sendData);
+        return res.status(201).json(sendData);
     }
 });
 exports.default = router;

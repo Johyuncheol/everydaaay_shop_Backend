@@ -12,42 +12,32 @@ const generateDate_WidthoutMilisec = (): Date => {
   return dateWithoutMilliseconds;
 };
 
-// 카테고리와 디테일별 마지막 수정 시간을 저장하기 위한 객체
+//  카테고리 타임스탬프 타입
 interface LastModifiedTimestamps {
-  [category: string]: {
-    [detail: string]: Date;
-  };
+  [timestampKey: string]: Date;
 }
 
-let lastModifiedTimestamps: LastModifiedTimestamps = {
-  women: {
-    all: generateDate_WidthoutMilisec(),
-    outer: generateDate_WidthoutMilisec(),
-    top: generateDate_WidthoutMilisec(),
-    bottom: generateDate_WidthoutMilisec(),
-  },
-  man: {
-    all: generateDate_WidthoutMilisec(),
-    outer: generateDate_WidthoutMilisec(),
-    top: generateDate_WidthoutMilisec(),
-    bottom: generateDate_WidthoutMilisec(),
-  },
-  interior: {
-    all: generateDate_WidthoutMilisec(),
-    livingRoom: generateDate_WidthoutMilisec(),
-    bedroom: generateDate_WidthoutMilisec(),
-    kitchen: generateDate_WidthoutMilisec(),
-  },
-};
+let lastModifiedTimestamps: LastModifiedTimestamps = {};
 
 router.get("/:category/:detail", (req: Request, res: Response) => {
-
   const category = req.params.category as string;
   const detail = req.params.detail as string;
-  const lastModifiedTimestamp = lastModifiedTimestamps[category]?.[detail];
 
+  const url = new URL(req.url!, `http://${req.headers.host}`);
+  const page = Number(url.searchParams.get("page"));
+  const numOfShow = Number(url.searchParams.get("numOfShow"));
 
- if (req.get("Cache-Control") === "no-cache" && req.get("If-Modified-Since")) {
+  let lastModifiedTimestamp;
+
+  const TimeStampKey = `${category}_${detail}_${page}`;
+
+  if (lastModifiedTimestamps[TimeStampKey] === undefined) {
+    lastModifiedTimestamps[TimeStampKey] = generateDate_WidthoutMilisec();
+  }
+
+  lastModifiedTimestamp = lastModifiedTimestamps[TimeStampKey];
+
+  if (req.get("Cache-Control") === "no-cache" && req.get("If-Modified-Since")) {
     // Last-Modified 헤더 확인
     const ifModifiedSince = req.get("If-Modified-Since");
     // 클라이언트에서 전송한 If-Modified-Since 값이 있고,
@@ -62,11 +52,6 @@ router.get("/:category/:detail", (req: Request, res: Response) => {
 
   // 해당 영역의 응답을 전송하기 전에 마지막 수정 시간 업데이트
   res.set("Last-Modified", lastModifiedTimestamp.toUTCString());
-
-  const url = new URL(req.url!, `http://${req.headers.host}`);
-  const page = Number(url.searchParams.get("page"));
-  const numOfShow = Number(url.searchParams.get("numOfShow"));
-
 
   interface Item {
     id: number;
@@ -83,7 +68,7 @@ router.get("/:category/:detail", (req: Request, res: Response) => {
     totalNums: number;
   }
 
- /*  const category = req.params.category as string;
+  /*  const category = req.params.category as string;
   const detail = req.params.detail as keyof WomenData; */
 
   let data: Item[] = [];
@@ -112,7 +97,7 @@ router.get("/:category/:detail", (req: Request, res: Response) => {
       totalNums: data.length,
     };
 
-    return res.status(202).json(sendData);
+    return res.status(201).json(sendData);
   }
 });
 
