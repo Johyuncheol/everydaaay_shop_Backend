@@ -1,7 +1,5 @@
 import express, { Request, Response } from "express";
 
-const shoppingBagData = require("../json/shoppingBag");
-
 const router = express.Router();
 const mongoose = require("mongoose");
 const { MONGO_USER_URI } = process.env;
